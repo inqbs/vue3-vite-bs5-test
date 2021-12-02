@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const state = () => ({
   count: 0,
   list: []
@@ -8,23 +10,31 @@ export const getters = {
 }
 
 export const actions = {
-  add ({ commit }, payload) {
-    commit('ADD', payload)
+  async add ({ commit }, payload) {
+    await commit('ADD', payload)
+    commit('SORT')
   },
   edit () {
 
   },
-  remove ({ commit }, payload) {
+  refresh ({ commit }) {
+    commit('SORT')
+  },
+  async remove ({ commit }, payload) {
     commit('REMOVE', payload)
+    commit('SORT')
   }
 }
 
 export const mutations = {
+  SORT (state) {
+    state.list.sort((a, b) => moment(b.date).diff(moment(a.date)))
+  },
   ADD (state, { text }) {
     state.list.push({
       id: state.count,
       text,
-      date: new Date()
+      date: moment()
     })
     state.count++
   },
@@ -32,7 +42,7 @@ export const mutations = {
 
   },
   REMOVE (state, { id }) {
-    state.list = state.list.filter(it => it.id !== id)
+    state.list = [...state.list.filter(it => it.id !== id)]
   }
 }
 
