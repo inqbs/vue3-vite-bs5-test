@@ -1,0 +1,29 @@
+@import '~bootstrap/scss/bootstrap';
+@import 'vue-fade';
+@import 'fonts';
+
+%fade-in{
+  transition: opacity 0.5s ease;
+}
+%fade-out {
+  opacity: 0;
+}
+
+.fade {
+  &-enter{
+    &-active{
+      @extend %fade-in;
+    }
+    &-from {
+      @extend %fade-out;
+    }
+  }
+  &-leave{
+    &-active{
+      @extend %fade-in;
+    }
+    &-from {
+      @extend %fade-out;
+    }
+  }
+}

@@ -1,7 +1,4 @@
 {
-  "[vue]": {
-    "editor.defaultFormatter": "johnsoncodehk.volar"
-  },
   "standard.enable": true,
   "standard.autoFixOnSave": true
 }

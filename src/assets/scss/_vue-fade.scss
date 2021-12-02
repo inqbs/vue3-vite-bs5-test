@@ -1,0 +1,20 @@
+%transition-config {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+%transition-opacity-flag {
+  opacity: 0;
+}
+.fade {
+  &-enter-active,
+  &-leave-active {
+    @extend %transition-config;
+  }
+
+  &-enter,
+  &-leave-active {
+    @extend %transition-opacity-flag;
+  }
+}
