@@ -8,8 +8,9 @@
         <transition
           name="fade"
           mode="out-in"
+          type="transition"
           :duration="150"
-        >
+        > 
           <component :is="Component" />
         </transition>
       </router-view>
