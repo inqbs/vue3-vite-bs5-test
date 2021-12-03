@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="row">
+  <div class="container">
+    <div class="row my-5">
       <div class="col col-12">
         <h2>Counter</h2>
       </div>

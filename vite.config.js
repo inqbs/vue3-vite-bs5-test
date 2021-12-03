@@ -24,5 +24,16 @@ export default defineConfig({
         replacement: path.resolve(__dirname, join('./node_modules')) + '/'
       }
     ]
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @import '@/assets/scss/variable';
+          @import '~bootstrap/scss/functions';
+          @import '~bootstrap/scss/variables';
+        `
+      }
+    }
   }
 })

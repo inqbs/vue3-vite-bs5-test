@@ -13,5 +13,10 @@ export default [
     name: 'Todo',
     path: '/todo',
     component: () => import('@/pages/Todo.page.vue')
+  },
+  {
+    name: 'Form',
+    path: '/form',
+    component: () => import('@/pages/Form.page.vue')
   }
 ]

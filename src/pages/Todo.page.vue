@@ -1,19 +1,21 @@
 <template>
-  <div>
-    <div class="row my-4">
-      <div class="col col-11">
+  <div class="container">
+    <div class="row my-5">
+      <div class="col col-10 col-md-11">
         <h2>Todo</h2>
-        <p class="text-muted small">
+        <p class="text-muted small mb-0">
           {{ list.length }} todos is added.
         </p>
       </div>
-      <div class="col col-1">
-        <button
-          class="btn btn-info w-100 text-white"
-          @click.prevent="refresh"
-        >
-          <i class="bi bi-arrow-clockwise" />
-        </button>
+      <div class="col col-2 col-md-1">
+        <div class="d-flex h-100">
+          <button
+            class="btn btn-info w-100 text-white align-self-center"
+            @click.prevent="refresh"
+          >
+            <i class="bi bi-arrow-clockwise" />
+          </button>
+        </div>
       </div>
     </div>
     <div class="row my-4">
@@ -24,6 +26,7 @@
               v-model="text"
               type="text"
               class="form-control"
+              placeholder="Add Your Todo"
             >
             <button
               class="btn btn-primary"
@@ -35,7 +38,7 @@
         </form>
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-5">
       <div class="col col-12">
         <transition-group
           class="list-group"
