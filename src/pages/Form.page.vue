@@ -52,8 +52,9 @@
         <div class="col col-12">
           <form
             id="sign-in-form"
-            action=""
-            class="border p-5"
+            action="#"
+            class="border p-5 needs-validation"
+            @submit.prevent="onSignin"
           >
             <h2 class="display-3 mb-3 text-center">
               Sign in
@@ -64,28 +65,28 @@
             <div class="form-floating mb-3">
               <input
                 id="sign-in-email"
-                v-model="signIn.email"
-                type="email"
+                v-model="signInEmail"
                 name="signin-email"
                 class="form-control"
                 placeholder="example@exmaple.com"
+                required
               >
               <label for="sign-in-email">Email</label>
             </div>
             <div class="form-floating mb-3">
               <input
                 id="sign-in-pwd"
-                v-model="signIn.pwd"
-                type="pwd"
-                name="pwd"
+                v-model="signInPwd"
+                type="password"
+                name="signin-pwd"
                 class="form-control"
                 placeholder="input your password"
+                required
               >
               <label for="sign-in-pwd">Password</label>
             </div>
             <button
               class="btn btn-dark btn-lg d-block w-100"
-              @click.prevent
             >
               Enter
             </button>
@@ -93,25 +94,103 @@
         </div>
       </div>
     </div>
+
+    <div
+      ref="toast"
+      class="toast position-fixed top-50 start-50 translate-middle"
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      <div class="toast-header">
+        <strong class="me-auto">Notice</strong>
+        <button
+          class="btn-close"
+          data-bs-dismiss="toast"
+          aria-label="Close"
+          type="button"
+        />
+      </div>
+      <div class="toast-body p-4">
+        <p class="mb-0 text-center">
+          {{ alertMsg }}
+        </p>
+      </div>
+      <div class="toast-footer">
+        <button
+          class="btn btn-dark d-block w-100"
+          data-bs-dismiss="toast"
+          aria-label="Close"
+          type="button"
+        >
+          ok
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import {ref, reactive, onMounted} from 'vue'
-import {Dropdown} from 'bootstrap'
+import {ref, watch, onMounted} from 'vue'
+import {Dropdown, Toast} from 'bootstrap'
 
-/*  menu dropdown */
+import {useForm, useField} from 'vee-validate'
+import {string as yupString} from 'yup'
+
+// menu dropdown
 const dropMenu = ref(null)
+
+// Toast
+const alertMsg = ref('')
+const toast = ref(null)
+
+//  setup bootstrap
 onMounted(() => {
   new Dropdown(dropMenu.value)
+  const bsToast = new Toast(toast.value, {
+    autohide: false,
+  })
+
+  //  show toast on changed alertMsg
+  watch(alertMsg, (val) => {
+    if(val){
+      bsToast.show()
+    }
+  })
+
+  //  clear alertMsg on closed toast
+  toast.value?.addEventListener('hidden.bs.toast', () => {
+    alertMsg.value = ''
+  })
 })
 
-/*   signin form  */
-const signIn = reactive({
-  email: '',
-  pwd: '',
-})
+/*  signin form  */
 
+//  vee-validate setup
+const {errors: signInFormErrors } = useForm()
+
+//  validation rules
+const {value: signInEmail} = useField('signin-email', yupString().required('Email is required.').email('Check your email address, It\'s wrong type'))
+const {value: signInPwd} = useField('signin-pwd', yupString().required('Password is required.').min(4, 'Password is over 4 characters.').max(16, 'Password is under 16 characters.'))
+
+//  submit
+const onSignin = () => {
+  const errorMessage = Object.values(signInFormErrors?.value ?? {})
+  if(errorMessage.length > 0){
+    alertMsg.value = errorMessage[0]
+    return
+  }
+
+  //  export as object to submit
+  const signIn = {
+    email: signInEmail,
+    pwd: signInPwd,
+  }
+
+  console.log('signin is fired', signIn, signInFormErrors)
+}
+
+/* end of signin form */
 
 </script>
 
