@@ -11,10 +11,7 @@
         type="transition"
         :duration="150"
       > 
-        <component
-          :is="Component"
-          @alert="showAlert"
-        />
+        <component :is="Component" />
       </transition>
     </router-view>
   </main>
