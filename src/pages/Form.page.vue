@@ -57,7 +57,17 @@
           />
         </div>
       </div>
+      <div class="row my-5">
+        <div class="col col-12">
+          <SignUpForm
+            id="signup-form"
+            @alert="onAlert"
+            @submit="onSubmit"
+          />
+        </div>
+      </div>
     </div>
+
     <teleport to="#alert">
       <MyAlert
         :message="alertMsg"
@@ -72,7 +82,9 @@ import { ref, onMounted } from 'vue'
 import { Dropdown } from 'bootstrap'
 
 import MyAlert from '@/components/MyAlert.vue'
+
 import SignInForm from '@/components/form/SignInForm.vue'
+import SignUpForm from '@/components/form/SignUpForm.vue'
 
 //  alert
 const alertMsg = ref('')

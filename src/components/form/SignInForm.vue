@@ -13,7 +13,7 @@
     <div class="form-floating mb-3">
       <input
         id="sign-in-email"
-        v-model="signInEmail"
+        v-model="email"
         name="signin-email"
         class="form-control"
         placeholder="example@exmaple.com"
@@ -24,7 +24,7 @@
     <div class="form-floating mb-3">
       <input
         id="sign-in-pwd"
-        v-model="signInPwd"
+        v-model="pwd"
         type="password"
         name="signin-pwd"
         class="form-control"
@@ -36,7 +36,8 @@
     <button
       class="btn btn-dark btn-lg d-block w-100"
     >
-      Enter
+      <i class="bi bi-box-arrow-in-right" />
+      <span> Enter </span>
     </button>
   </form>
 </template>
@@ -48,26 +49,22 @@ import { string as yupString } from 'yup'
 const emit = defineEmits(['submit', 'alert'])
 
 //  vee-validate setup
-const { errors: signInFormErrors } = useForm()
+const { errors } = useForm()
 
 //  validation rules
-const { value: signInEmail } = useField('signin-email', yupString().required('Email is required.').email('Check your email address, It\'s wrong type'))
-const { value: signInPwd } = useField('signin-pwd', yupString().required('Password is required.').min(4, 'Password is over 4 characters.').max(16, 'Password is under 16 characters.'))
+const { value: email } = useField('signin-email', yupString().required('Email is required.').email('Check your email address, It\'s wrong type'))
+const { value: pwd } = useField('signin-pwd', yupString().required('Password is required.').min(4, 'Password is over 4 characters.').max(16, 'Password is under 16 characters.'))
 
 //  submit
 const onSignin = () => {
-  const errorMessage = Object.values(signInFormErrors?.value ?? {})
+  const errorMessage = Object.values(errors?.value ?? {})
   if (errorMessage.length > 0) {
     emit('alert', errorMessage[0])
     return
   }
 
   //  export as object to submit
-  const formData = {
-    email: signInEmail,
-    pwd: signInPwd
-  }
-
+  const formData = { email, pwd }
   emit('submit', formData)
 }
 </script>
