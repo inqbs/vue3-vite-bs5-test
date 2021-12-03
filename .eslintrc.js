@@ -1,7 +1,8 @@
 module.exports = {
   env: {
     node: true,
-    browser: true
+    browser: true,
+    'vue/setup-compiler-macros': true
   },
   extends: [
     'eslint:recommended',
@@ -9,5 +10,6 @@ module.exports = {
   ],
   rules: {
     'vue/multi-word-component-names': 'off'
+
   }
 }

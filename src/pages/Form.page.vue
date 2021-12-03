@@ -94,74 +94,36 @@
         </div>
       </div>
     </div>
-
-    <div
-      ref="toast"
-      class="toast position-fixed top-50 start-50 translate-middle"
-      role="alert"
-      aria-live="assertive"
-      aria-atomic="true"
-    >
-      <div class="toast-header">
-        <strong class="me-auto">Notice</strong>
-        <button
-          class="btn-close"
-          data-bs-dismiss="toast"
-          aria-label="Close"
-          type="button"
-        />
-      </div>
-      <div class="toast-body p-4">
-        <p class="mb-0 text-center">
-          {{ alertMsg }}
-        </p>
-      </div>
-      <div class="toast-footer">
-        <button
-          class="btn btn-dark d-block w-100"
-          data-bs-dismiss="toast"
-          aria-label="Close"
-          type="button"
-        >
-          ok
-        </button>
-      </div>
-    </div>
+    <teleport to="#alert">
+      <MyAlert
+        :message="alertMsg"
+        @close="onAlertClose"
+      />
+    </teleport>
   </div>
 </template>
 
 <script setup>
-import {ref, watch, onMounted} from 'vue'
-import {Dropdown, Toast} from 'bootstrap'
+import {ref, onMounted} from 'vue'
+import {Dropdown} from 'bootstrap'
 
 import {useForm, useField} from 'vee-validate'
 import {string as yupString} from 'yup'
 
+import MyAlert from '@/components/MyAlert.vue'
+
+//  alert 
+const alertMsg = ref('')
+const onAlertClose = () => {
+  alertMsg.value = ''
+}
+
 // menu dropdown
 const dropMenu = ref(null)
-
-// Toast
-const alertMsg = ref('')
-const toast = ref(null)
 
 //  setup bootstrap
 onMounted(() => {
   new Dropdown(dropMenu.value)
-  const bsToast = new Toast(toast.value, {
-    autohide: false,
-  })
-
-  //  show toast on changed alertMsg
-  watch(alertMsg, (val) => {
-    if(val){
-      bsToast.show()
-    }
-  })
-
-  //  clear alertMsg on closed toast
-  toast.value?.addEventListener('hidden.bs.toast', () => {
-    alertMsg.value = ''
-  })
 })
 
 /*  signin form  */
