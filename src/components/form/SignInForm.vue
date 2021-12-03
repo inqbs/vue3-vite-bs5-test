@@ -42,22 +42,22 @@
 </template>
 
 <script setup>
-import {useForm, useField} from 'vee-validate'
-import {string as yupString} from 'yup'
+import { useForm, useField } from 'vee-validate'
+import { string as yupString } from 'yup'
 
 const emit = defineEmits(['submit', 'alert'])
 
 //  vee-validate setup
-const {errors: signInFormErrors } = useForm()
+const { errors: signInFormErrors } = useForm()
 
 //  validation rules
-const {value: signInEmail} = useField('signin-email', yupString().required('Email is required.').email('Check your email address, It\'s wrong type'))
-const {value: signInPwd} = useField('signin-pwd', yupString().required('Password is required.').min(4, 'Password is over 4 characters.').max(16, 'Password is under 16 characters.'))
+const { value: signInEmail } = useField('signin-email', yupString().required('Email is required.').email('Check your email address, It\'s wrong type'))
+const { value: signInPwd } = useField('signin-pwd', yupString().required('Password is required.').min(4, 'Password is over 4 characters.').max(16, 'Password is under 16 characters.'))
 
 //  submit
 const onSignin = () => {
   const errorMessage = Object.values(signInFormErrors?.value ?? {})
-  if(errorMessage.length > 0){
+  if (errorMessage.length > 0) {
     emit('alert', errorMessage[0])
     return
   }
@@ -65,7 +65,7 @@ const onSignin = () => {
   //  export as object to submit
   const formData = {
     email: signInEmail,
-    pwd: signInPwd,
+    pwd: signInPwd
   }
 
   emit('submit', formData)

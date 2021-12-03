@@ -73,7 +73,7 @@
 </template>
 
 <script setup>
-import {computed, ref} from 'vue'
+import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
 import moment from 'moment'
@@ -86,10 +86,10 @@ const list = computed(() => store.getters['TodoStore/todoList'])
 
 //  methods
 const add = () => {
-  store.dispatch('TodoStore/add', {text: text.value})
+  store.dispatch('TodoStore/add', { text: text.value })
   text.value = ''
 }
-const remove = id => store.dispatch('TodoStore/remove', {id})
+const remove = id => store.dispatch('TodoStore/remove', { id })
 const refresh = () => store.dispatch('TodoStore/refresh')
 </script>
 

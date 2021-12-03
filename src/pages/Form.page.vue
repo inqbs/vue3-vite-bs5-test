@@ -68,13 +68,13 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from 'vue'
-import {Dropdown} from 'bootstrap'
+import { ref, onMounted } from 'vue'
+import { Dropdown } from 'bootstrap'
 
 import MyAlert from '@/components/MyAlert.vue'
 import SignInForm from '@/components/form/SignInForm.vue'
 
-//  alert 
+//  alert
 const alertMsg = ref('')
 const onAlert = (msg = '') => {
   alertMsg.value = msg
@@ -90,9 +90,9 @@ const dropMenu = ref(null)
 
 //  setup bootstrap
 onMounted(() => {
+  //  eslint-disable-next-line no-new
   new Dropdown(dropMenu.value)
 })
-
 </script>
 
 <style lang="scss" module>

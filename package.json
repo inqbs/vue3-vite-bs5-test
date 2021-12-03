@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "lint": "eslint --ext .js,.jsx,.vue ./**/* --fix"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.0",
@@ -22,6 +23,10 @@
     "@vitejs/plugin-legacy": "^1.6.3",
     "@vitejs/plugin-vue": "^1.9.3",
     "eslint": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-vue": "^8.1.1",
     "sass": "^1.44.0",
     "standard": "^16.0.4",

@@ -10,7 +10,7 @@
         mode="out-in"
         type="transition"
         :duration="150"
-      > 
+      >
         <component :is="Component" />
       </transition>
     </router-view>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {ref} from 'vue'
+import { ref } from 'vue'
 
 import MyHeader from '@/components/MyHeader.vue'
 import MyAlert from '@/components/MyAlert.vue'
@@ -26,15 +26,15 @@ import MyAlert from '@/components/MyAlert.vue'
 export default {
   components: {
     MyHeader,
-    MyAlert,
+    MyAlert
   },
-  setup(){
+  setup () {
     const message = ref('')
     const showAlert = (msg) => (message.value = msg)
 
     return {
       message,
-      showAlert,
+      showAlert
     }
   }
 }

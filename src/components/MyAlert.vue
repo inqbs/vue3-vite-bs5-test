@@ -39,8 +39,8 @@
 </template>
 
 <script setup>
-import {ref, onMounted, watch, toRefs} from 'vue'
-import {Toast} from 'bootstrap'
+import { ref, onMounted, watch, toRefs } from 'vue'
+import { Toast } from 'bootstrap'
 
 const props = defineProps({
   message: {
@@ -48,19 +48,19 @@ const props = defineProps({
     required: true
   }
 })
-const {message} = toRefs(props)
+const { message } = toRefs(props)
 const emit = defineEmits(['close'])
 
 const toast = ref(null)
 
 onMounted(() => {
   const bsToast = new Toast(toast.value, {
-    autohide: false,
+    autohide: false
   })
 
   //  show toast on changed alertMsg
   watch(message, (val) => {
-    if(val){
+    if (val) {
       bsToast.show()
     }
   })

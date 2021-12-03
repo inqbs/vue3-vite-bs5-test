@@ -34,7 +34,7 @@
 import logoImg from '@/assets/images/logo.png'
 import routes from '@/router/routes.js'
 
-const menuList = routes.filter(it=>!!it.component)
+const menuList = routes.filter(it => !!it.component)
 </script>
 
 <style lang="scss" scoped>
