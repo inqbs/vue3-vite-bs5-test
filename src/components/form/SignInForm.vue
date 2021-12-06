@@ -17,7 +17,6 @@
         name="signin-email"
         class="form-control"
         placeholder="example@exmaple.com"
-        required
       >
       <label for="sign-in-email">Email</label>
     </div>
@@ -29,7 +28,6 @@
         name="signin-pwd"
         class="form-control"
         placeholder="input your password"
-        required
       >
       <label for="sign-in-pwd">Password</label>
     </div>
@@ -49,24 +47,24 @@ import { string as yupString } from 'yup'
 const emit = defineEmits(['submit', 'alert'])
 
 //  vee-validate setup
-const { errors } = useForm()
+const { handleSubmit } = useForm()
 
 //  validation rules
 const { value: email } = useField('signin-email', yupString().required('Email is required.').email('Check your email address, It\'s wrong type'))
 const { value: pwd } = useField('signin-pwd', yupString().required('Password is required.').min(4, 'Password is over 4 characters.').max(16, 'Password is under 16 characters.'))
 
 //  submit
-const onSignin = () => {
-  const errorMessage = Object.values(errors?.value ?? {})
-  if (errorMessage.length > 0) {
-    emit('alert', errorMessage[0])
-    return
-  }
-
+const onSignin = handleSubmit(() => {
   //  export as object to submit
   const formData = { email, pwd }
   emit('submit', formData)
-}
+}, ({ errors }) => {
+  //  on invalid
+  const errorMessage = Object.values(errors)
+  if (errorMessage.length > 0) {
+    emit('alert', `[Sign In] ${errorMessage[0]}`)
+  }
+})
 </script>
 
 <style lang="scss" scoped>

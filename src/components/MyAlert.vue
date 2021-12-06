@@ -27,7 +27,7 @@
         aria-label="Close"
         type="button"
       >
-        ok
+        OK
       </button>
     </div>
   </div>

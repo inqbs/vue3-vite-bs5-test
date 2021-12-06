@@ -2,7 +2,7 @@
   <form
     action="#"
     class="border p-5 needs-validation"
-    @submit.prevent="onSignin"
+    @submit.prevent="onSignup"
   >
     <h2 class="display-3 mb-3 text-center">
       Sign Up
@@ -23,7 +23,6 @@
         name="signup-email"
         class="form-control"
         placeholder="example@exmaple.com"
-        required
         :class="{'is-invalid': emailError}"
       >
       <span class="invalid-feedback">{{ emailError }}</span>
@@ -40,7 +39,6 @@
         name="signup-username"
         class="form-control"
         placeholder="example"
-        required
         :class="{'is-invalid': usernameError}"
       >
       <span class="invalid-feedback">{{ usernameError }}</span>
@@ -58,7 +56,6 @@
         name="signup-pwd"
         class="form-control"
         placeholder="input your password"
-        required
         :class="{'is-invalid': pwdError}"
       >
       <span class="invalid-feedback">{{ pwdError }}</span>
@@ -76,7 +73,6 @@
         name="signup-pwdc"
         class="form-control"
         placeholder="input your password"
-        required
         :class="{'is-invalid': pwdcError}"
       >
       <span class="invalid-feedback">{{ pwdcError }}</span>
@@ -150,9 +146,8 @@ const moveSelectedDate = (e) => {
 }
 
 //  vee-validate setup
-const { errors } = useForm()
+const { handleSubmit } = useForm()
 
-//  validation rules
 const { value: email, errorMessage: emailError } = useField(
   'signup-email',
   yupString()
@@ -181,17 +176,17 @@ const { value: pwdc, errorMessage: pwdcError } = useField(
 )
 
 //  submit
-const onSignin = () => {
-  const errorMessage = Object.values(errors?.value ?? {})
-  if (errorMessage.length > 0) {
-    emit('alert', errorMessage[0])
-    return
-  }
-
+const onSignup = handleSubmit(() => {
   //  export as object to submit
-  const formData = { email, username, pwd, pwdc }
+  const formData = { email: email.value, username: username.value, pwd: pwd.value, pwdc: pwdc.value }
   emit('submit', formData)
-}
+}, ({ errors }) => {
+  //  on invalid
+  const errorMessage = Object.values(errors)
+  if (errorMessage.length > 0) {
+    emit('alert', `[Sign Up] ${errorMessage[0]}`)
+  }
+})
 </script>
 
 <style lang="scss" scoped>
