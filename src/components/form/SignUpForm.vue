@@ -11,94 +11,112 @@
       Welcome to examaple.com
     </p>
 
-    <label
-      for="sign-up-email"
-      class="form-label"
-    >
-      Email</label>
-    <input
-      id="sign-up-email"
-      v-model="email"
-      name="signup-email"
-      class="form-control mb-3"
-      placeholder="example@exmaple.com"
-      required
-    >
-
-    <label
-      for="sign-up-email"
-      class="form-label"
-    >Username</label>
-    <input
-      id="sign-up-email"
-      v-model="username"
-      name="signup-username"
-      class="form-control mb-3"
-      placeholder="example"
-      required
-    >
-
-    <label
-      for="sign-up-pwd"
-      class="form-label"
-    >Password</label>
-    <input
-      id="sign-up-pwd"
-      v-model="pwd"
-      type="password"
-      name="signup-pwd"
-      class="form-control mb-3"
-      placeholder="input your password"
-      required
-    >
-
-    <label
-      for="sign-up-pwd"
-      class="form-label"
-    >Password Confirm</label>
-    <input
-      id="sign-up-pwd-confirm"
-      v-model="pwdc"
-      type="password"
-      name="signup-pwdc"
-      class="form-control mb-3"
-      placeholder="input your password"
-      required
-    >
-
-    <label
-      for="sign-up-pwd"
-      class="form-label"
-    >Birthday</label>
     <div class="mb-3">
-      <date-picker
-        ref="birthdayPicker"
-        v-model="birthday"
-        :columns="2"
-        :available-dates="{end: new Date()}"
-        @popover-will-show="moveSelectedDate"
+      <label
+        for="signup-email"
+        class="form-label"
       >
-        <template #default="{inputValue, togglePopover}">
-          <div class="input-group">
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click.prevent="togglePopover"
-            >
-              <i class="bi bi-calendar3" />
-            </button>
-            <input
-              id="signup-birthday"
-              :value="inputValue"
-              type="text"
-              name="birthday"
-              readonly
-              class="form-control bg-white"
-              @click.prevent="togglePopover"
-            >
-          </div>
-        </template>
-      </date-picker>
+        Email</label>
+      <input
+        id="signup-email"
+        v-model="email"
+        name="signup-email"
+        class="form-control"
+        placeholder="example@exmaple.com"
+        required
+        :class="{'is-invalid': emailError}"
+      >
+      <span class="invalid-feedback">{{ emailError }}</span>
+    </div>
+
+    <div class="mb-3">
+      <label
+        for="signup-email"
+        class="form-label"
+      >Username</label>
+      <input
+        id="signup-email"
+        v-model="username"
+        name="signup-username"
+        class="form-control"
+        placeholder="example"
+        required
+        :class="{'is-invalid': usernameError}"
+      >
+      <span class="invalid-feedback">{{ usernameError }}</span>
+    </div>
+
+    <div class="mb-3">
+      <label
+        for="signup-pwd"
+        class="form-label"
+      >Password</label>
+      <input
+        id="signup-pwd"
+        v-model="pwd"
+        type="password"
+        name="signup-pwd"
+        class="form-control"
+        placeholder="input your password"
+        required
+        :class="{'is-invalid': pwdError}"
+      >
+      <span class="invalid-feedback">{{ pwdError }}</span>
+    </div>
+
+    <div class="mb-3">
+      <label
+        for="signup-pwdc"
+        class="form-label"
+      >Password Confirm</label>
+      <input
+        id="signup-pwdc"
+        v-model="pwdc"
+        type="password"
+        name="signup-pwdc"
+        class="form-control"
+        placeholder="input your password"
+        required
+        :class="{'is-invalid': pwdcError}"
+      >
+      <span class="invalid-feedback">{{ pwdcError }}</span>
+    </div>
+
+    <div class="mb-3">
+      <label
+        for="signup-pwd"
+        class="form-label"
+      >Birthday</label>
+      <div class="mb-3">
+        <date-picker
+          ref="birthdayPicker"
+          v-model="birthday"
+          :columns="2"
+          :available-dates="{end: new Date()}"
+          @popover-will-show="moveSelectedDate"
+        >
+          <template #default="{inputValue, togglePopover}">
+            <div class="input-group">
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click.prevent="togglePopover"
+              >
+                <i class="bi bi-calendar3" />
+              </button>
+              <input
+                id="signup-birthday"
+                :value="inputValue"
+                type="text"
+                name="birthday"
+                readonly
+                class="form-control bg-white"
+                @click.prevent="togglePopover"
+              >
+            </div>
+          </template>
+        </date-picker>
+      </div>
     </div>
 
     <div class="mt-4">
@@ -114,7 +132,7 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { useForm, useField } from 'vee-validate'
-import { string as yupString, ref as yupRef } from 'yup'
+import { string as yupString } from 'yup'
 
 import { DatePicker } from 'v-calendar'
 
@@ -135,31 +153,31 @@ const moveSelectedDate = (e) => {
 const { errors } = useForm()
 
 //  validation rules
-const { value: email } = useField(
+const { value: email, errorMessage: emailError } = useField(
   'signup-email',
   yupString()
     .required('Email is required.')
     .email('Check your email address, It\'s wrong type')
 )
-const { value: username } = useField(
+const { value: username, errorMessage: usernameError } = useField(
   'signup-username',
   yupString()
     .required('Username is required.')
     .min(4, 'Username is over 4 characters.')
     .max(12, 'Username is under 12 characters.')
 )
-const { value: pwd } = useField(
+const { value: pwd, errorMessage: pwdError } = useField(
   'signup-pwd',
   yupString()
     .required('Password is required.')
     .min(4, 'Password is over 4 characters.')
     .max(16, 'Password is under 16 characters.')
 )
-const { value: pwdc } = useField(
+const { value: pwdc, errorMessage: pwdcError } = useField(
   'signup-pwdc',
   yupString()
     .required('Password Confirm is required.')
-    .oneOf([yupRef('pwd'), null], 'Passwords must match.')
+    .test('sameValue', 'Passwords must match.', value => value === pwd.value)
 )
 
 //  submit

@@ -18,11 +18,11 @@ export default defineConfig({
     alias: [
       {
         find: /^@\//,
-        replacement: path.resolve(__dirname, './src') + '/'
+        replacement: `${path.resolve(__dirname, './src')}/`
       },
       {
         find: /^~/,
-        replacement: path.resolve(__dirname, join('./node_modules')) + '/'
+        replacement: `${path.resolve(__dirname, join('./node_modules'))}/`
       }
     ]
   },
@@ -39,7 +39,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      plugins: [visualizer({ gzipSize: true, filename: 'dist/stats.html', brotliSize: true })]
+      plugins: [visualizer({ gzipSize: true, filename: 'dist/stats.html', brotliSize: true/* , template: 'network' */ })]
     }
   }
 })
