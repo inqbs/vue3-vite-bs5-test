@@ -94,11 +94,13 @@ const refresh = () => store.dispatch('TodoStore/refresh')
 </script>
 
 <style lang="scss" scoped>
-.flip-list-move {
-  transition: all 0.3s ease;
-}
-.flip-list-leave-to {
-  opacity: 0;
-  transform: translateX(30px)
+.flip-list {
+  &-move{
+    transition: all 0.3s ease;
+  }
+  &-leave-to{
+      opacity: 0;
+      transform: translateX(30px)
+  }
 }
 </style>

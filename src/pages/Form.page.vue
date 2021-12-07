@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div
-      class="sticky-top py-5 bg-white border-bottom"
-      :class="$style['form-header']"
-    >
+    <div class="py-5 bg-white border-bottom">
       <div class="container">
         <div class="row">
           <div class="col col-9 col-md-10">
@@ -106,9 +103,3 @@ onMounted(() => {
   new Dropdown(dropMenu.value)
 })
 </script>
-
-<style lang="scss" module>
-.form-header {
-  top: $spacer * 3;
-}
-</style>
