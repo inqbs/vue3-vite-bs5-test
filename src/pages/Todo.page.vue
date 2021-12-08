@@ -9,12 +9,23 @@
       </div>
       <div class="col col-2 col-md-1">
         <div class="d-flex h-100">
-          <button
-            class="btn btn-info w-100 text-white align-self-center"
-            @click.prevent="refresh"
+          <div
+            class="btn-group"
+            role="group"
           >
-            <i class="bi bi-arrow-clockwise" />
-          </button>
+            <button
+              class="btn btn-info w-100 text-white align-self-center"
+              @click.prevent="refresh"
+            >
+              <i class="bi bi-arrow-clockwise" />
+            </button>
+            <button
+              class="btn btn-danger w-100 text-white align-self-center"
+              @click.prevent="clear"
+            >
+              <i class="bi bi-eraser-fill" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -74,23 +85,24 @@
 
 <script setup>
 import { computed, ref } from 'vue'
-import { useStore } from 'vuex'
+import { useTodoStore } from '@/stores/todo'
 
 import moment from 'moment'
 
-const store = useStore()
+const todoStore = useTodoStore()
 
 //  data & computed
 const text = ref('')
-const list = computed(() => store.getters['TodoStore/todoList'])
+const list = computed(() => todoStore.list)
 
 //  methods
 const add = () => {
-  store.dispatch('TodoStore/add', { text: text.value })
+  todoStore.add({ text: text.value })
   text.value = ''
 }
-const remove = id => store.dispatch('TodoStore/remove', { id })
-const refresh = () => store.dispatch('TodoStore/refresh')
+const remove = id => todoStore.remove({ id })
+const refresh = () => todoStore.sort()
+const clear = () => todoStore.clear()
 </script>
 
 <style lang="scss" scoped>
