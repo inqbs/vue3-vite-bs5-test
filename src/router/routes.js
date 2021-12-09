@@ -32,5 +32,13 @@ export default [
     meta: {
       requiredLoggedIn: true
     }
+  },
+  {
+    name: 'Cropper',
+    path: '/cropper',
+    component: () => import('@/pages/Cropper.page.vue'),
+    meta: {
+      requiredLoggedIn: true
+    }
   }
 ]
