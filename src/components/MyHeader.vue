@@ -75,6 +75,6 @@ const isLoggedIn = computed(() => authStore.isLoggedIn)
 //  logout
 const logout = async () => {
   await authStore.logout()
-  router.push('/')
+  router.push('/login')
 }
 </script>
