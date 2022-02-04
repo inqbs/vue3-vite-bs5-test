@@ -5,6 +5,7 @@ import { createPinia } from 'pinia'
 import piniaPersist from 'pinia-plugin-persistedstate'
 
 import '@/plugins/day.js'
+import '@/plugins/gsap.js'
 
 import App from '@/App.vue'
 
