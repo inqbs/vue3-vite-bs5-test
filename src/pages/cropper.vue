@@ -71,5 +71,11 @@ const crop = async () => {
 </script>
 
 <style lang="scss">
-@import '~cropperjs/src/index.scss';
+@import '~/cropperjs/src/index.scss';
 </style>
+
+<route lang="yaml">
+name: Cropper
+meta:
+  requiresAuth: true
+</route>

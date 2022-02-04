@@ -65,9 +65,9 @@
             <div class="d-flex w-100 justify-content-between">
               <time
                 class="text-muted small"
-                :datetime="moment(item.date).format('YYYY-MM-dd HH:mm:ss')"
+                :datetime="dayjs(item.date).format('YYYY-MM-dd HH:mm:ss')"
               >
-                {{ moment(item.date).fromNow() }}
+                {{ dayjs(item.date).fromNow() }}
               </time>
               <button
                 class="btn btn-sm btn-danger"
@@ -87,7 +87,7 @@
 import { computed, ref } from 'vue'
 import { useTodoStore } from '@/stores/todo'
 
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 const todoStore = useTodoStore()
 
@@ -116,3 +116,9 @@ const clear = () => todoStore.clear()
   }
 }
 </style>
+
+<route lang="yaml">
+name: Todo
+meta:
+  requiresAuth: true
+</route>

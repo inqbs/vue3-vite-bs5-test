@@ -49,3 +49,7 @@ const onSubmit = ({ email, pwd }) => {
 <style lang="scss" scoped>
 
 </style>
+
+<route lang="yaml">
+name: Login
+</route>

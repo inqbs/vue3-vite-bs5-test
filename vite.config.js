@@ -3,6 +3,7 @@ import path, { join } from 'path'
 
 import vue from '@vitejs/plugin-vue'
 import legacy from '@vitejs/plugin-legacy'
+import Pages from 'vite-plugin-pages'
 import { visualizer } from 'rollup-plugin-visualizer'
 
 // https://vitejs.dev/config/
@@ -12,7 +13,8 @@ export default defineConfig({
     legacy({
       targets: ['> 0.5%', 'not IE 11', 'last 2 versions'],
       polyfills: true
-    })
+    }),
+    Pages()
   ],
   resolve: {
     alias: [
@@ -21,7 +23,7 @@ export default defineConfig({
         replacement: `${path.resolve(__dirname, './src')}/`
       },
       {
-        find: /^~/,
+        find: /^~\//,
         replacement: `${path.resolve(__dirname, join('./node_modules'))}/`
       }
     ]
@@ -31,8 +33,8 @@ export default defineConfig({
       scss: {
         additionalData: `
           @import '@/assets/scss/variable';
-          @import '~bootstrap/scss/functions';
-          @import '~bootstrap/scss/variables';
+          @import '~/bootstrap/scss/functions';
+          @import '~/bootstrap/scss/variables';
         `
       }
     }

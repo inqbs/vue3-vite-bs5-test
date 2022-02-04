@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 export const useTodoStore = defineStore('TodoStore', {
   state: () => ({
@@ -11,13 +11,13 @@ export const useTodoStore = defineStore('TodoStore', {
   },
   actions: {
     sort () {
-      this.list.sort((a, b) => moment(b.date).diff(moment(a.date)))
+      this.list.sort((a, b) => dayjs(b.date).diff(dayjs(a.date)))
     },
     add ({ text }) {
       this.list.push({
         id: this.count,
         text,
-        date: moment()
+        date: dayjs()
       })
       this.count++
       this.sort()

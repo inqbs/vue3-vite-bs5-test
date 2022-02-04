@@ -103,3 +103,9 @@ onMounted(() => {
   new Dropdown(dropMenu.value)
 })
 </script>
+
+<route lang="yaml">
+name: Form
+meta:
+  requiresAuth: true
+</route>
