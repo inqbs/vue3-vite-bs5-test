@@ -99,6 +99,8 @@ onMounted(() => {
       display: flex;
     }
     &-item {
+      width: 400px;
+      height: 400px;
       &:not(:last-child) {
         margin: 0 $spacer;
       }

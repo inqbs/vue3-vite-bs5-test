@@ -14,11 +14,43 @@
         <ImageScroll />
       </div>
     </div>
+    <hr>
+    <div
+      class="row"
+      :class="$style.section"
+    >
+      <div class="col col-12">
+        <LongTextWithImageScroll />
+      </div>
+    </div>
+    <hr>
+    <div
+      class="row"
+      :class="$style.section"
+    >
+      <div class="col col-12">
+        <SlowBackgroundScroll />
+      </div>
+    </div>
+    <div
+      class="row bg-dark"
+      :class="$style.section"
+    >
+      <div class="col col-12">
+        <div class="h-100 d-flex justify-content-center align-items-center">
+          <p class="display-3 text-white">
+            Amazing Awesome.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import ImageScroll from '@/components/scroll-trigger/ImageScroll.vue'
+import LongTextWithImageScroll from '@/components/scroll-trigger/LongTextWithImageScroll.vue'
+import SlowBackgroundScroll from '@/components/scroll-trigger/SlowBackgroundScroll.vue'
 </script>
 
 <style lang="scss" module>
