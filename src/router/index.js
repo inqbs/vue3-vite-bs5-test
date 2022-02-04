@@ -17,7 +17,7 @@ router.beforeEach((to, from, next) => {
   }
 
   switch (true) {
-    //  is login required
+    // is login required
     case (to.meta.requiredLoggedIn && !authStore.isLoggedIn):
       return next('/login')
     default:
