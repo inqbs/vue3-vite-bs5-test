@@ -36,5 +36,8 @@ const addCount = () => count.value++
 const subtrCount = () => count.value--
 </script>
 
-<style lang="scss" scoped>
-</style>
+<route lang="yaml">
+name: Counter
+meta:
+  requiresAuth: true
+</route>

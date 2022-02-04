@@ -5,6 +5,9 @@
     "editor.defaultFormatter": "vscode.html-language-features"
   },
   "[vue]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "volar.grammar.customBlocks": {
+      "route": "json"
+    }
   }
 }

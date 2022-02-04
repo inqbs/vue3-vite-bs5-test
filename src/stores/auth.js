@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 
-import moment from 'moment'
-import { AES, enc } from 'crypto-js'
+import dayjs from 'dayjs'
+import AES from 'crypto-js/aes'
+import encUtf8 from 'crypto-js/enc-utf8'
 
 //  get enckey from .env.local
 const enckey = import.meta.env.VITE_ENCKEY
@@ -30,7 +31,7 @@ export const useAuthStore = defineStore('AuthStore', {
     login ({ username, password }) {
       if (!username || !password) return
 
-      this.accessTime = moment()
+      this.accessTime = dayjs()
       this.username = username
       this.token = generateToken(username, password)
     },
@@ -39,10 +40,10 @@ export const useAuthStore = defineStore('AuthStore', {
       const token = this.token
 
       //  get username from token
-      const username = AES.decrypt(token, enckey).toString(enc.Utf8).split('-')?.[0]
+      const username = AES.decrypt(token, enckey).toString(encUtf8).split('-')?.[0]
 
       this.username = username
-      this.accessTime = moment()
+      this.accessTime = dayjs()
     },
     logout () {
       this.$reset()

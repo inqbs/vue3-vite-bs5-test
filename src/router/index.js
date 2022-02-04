@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import routes from '@/router/routes'
+import routes from '~pages'
 
 import { useAuthStore } from '@/stores/auth'
 
@@ -17,8 +17,8 @@ router.beforeEach((to, from, next) => {
   }
 
   switch (true) {
-    //  is login required
-    case (to.meta.requiredLoggedIn && !authStore.isLoggedIn):
+    // is login required
+    case (to.meta.requiresAuth && !authStore.isLoggedIn):
       return next('/login')
     default:
       next()

@@ -60,7 +60,7 @@ import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
 
 import logoImg from '@/assets/images/logo.png'
-import routes from '@/router/routes.js'
+import routes from '~pages'
 
 const router = useRouter()
 const authStore = useAuthStore()

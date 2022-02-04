@@ -74,7 +74,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@import '~bootstrap/scss/mixins/backdrop';
+@import '~/bootstrap/scss/mixins/backdrop';
 
 .alert {
   &-toast {
