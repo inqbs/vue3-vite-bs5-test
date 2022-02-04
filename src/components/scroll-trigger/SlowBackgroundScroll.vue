@@ -69,8 +69,6 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .wrapper {
-  margin-left: 15px * -1;
-  margin-right: 15px * -1;
 }
 .inner {
   position: relative;

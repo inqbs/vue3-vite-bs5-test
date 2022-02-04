@@ -10,26 +10,16 @@
       {{ upperAlphabet.join('') }}
     </p>
     <div
+      v-for="wIdx in 3"
+      :key="`img-wrapper-${wIdx}`"
       :class="$style['scroll-image-img-wrapper']"
       class="scroll-image-target"
     >
       <img
         v-for="idx in 8"
-        :key="`img-1-${idx}`"
+        :key="`img-${wIdx}-${idx}`"
         :class="$style['scroll-image-img-item']"
-        :src="`https://picsum.photos/id/${50 + idx}/400/400`"
-        :alt="`img-${idx}`"
-      >
-    </div>
-    <div
-      :class="$style['scroll-image-img-wrapper']"
-      class="scroll-image-target"
-    >
-      <img
-        v-for="idx in 8"
-        :key="`img-2-${idx}`"
-        :class="$style['scroll-image-img-item']"
-        :src="`https://picsum.photos/id/${150 + idx}/400/400`"
+        :src="`https://picsum.photos/id/${15 * (wIdx+1) + idx}/400/400`"
         :alt="`img-${idx}`"
       >
     </div>

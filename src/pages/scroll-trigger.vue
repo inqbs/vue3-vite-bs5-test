@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid my-5">
+  <div class="mt-5">
     <div class="text-center">
       <h2>ScrollTrigger Test</h2>
       <p class="small text-muted">
@@ -7,42 +7,34 @@
       </p>
     </div>
     <div
-      class="row"
       :class="$style.section"
     >
-      <div class="col col-12">
-        <ImageScroll />
-      </div>
+      <ImageScroll />
     </div>
     <hr>
     <div
-      class="row"
       :class="$style.section"
     >
-      <div class="col col-12">
-        <LongTextWithImageScroll />
-      </div>
+      <LongTextWithImageScroll />
     </div>
     <hr>
     <div
-      class="row"
-      :class="$style.section"
+      :class="$style?.['section']"
     >
-      <div class="col col-12">
-        <SlowBackgroundScroll />
-      </div>
+      <SlowBackgroundScroll />
     </div>
     <div
-      class="row bg-dark"
+      class="bg-dark h-100 d-flex justify-content-center align-items-center"
       :class="$style.section"
     >
-      <div class="col col-12">
-        <div class="h-100 d-flex justify-content-center align-items-center">
-          <p class="display-3 text-white">
-            Amazing Awesome.
-          </p>
-        </div>
-      </div>
+      <p class="display-3 text-white">
+        Amazing Awesome.
+      </p>
+    </div>
+    <div
+      :class="$style?.['section']"
+    >
+      <FakeHorizentalScroll />
     </div>
   </div>
 </template>
@@ -51,6 +43,7 @@
 import ImageScroll from '@/components/scroll-trigger/ImageScroll.vue'
 import LongTextWithImageScroll from '@/components/scroll-trigger/LongTextWithImageScroll.vue'
 import SlowBackgroundScroll from '@/components/scroll-trigger/SlowBackgroundScroll.vue'
+import FakeHorizentalScroll from '@/components/scroll-trigger/FakeHorizentalScroll.vue'
 </script>
 
 <style lang="scss" module>
